@@ -7,4 +7,7 @@
     <string name="not_connected">Не удалось подключиться к гугл сервисам</string>
     <string name="sign_in">Sign In</string>
     <string name="signin_other_error">Ошибки при авториации</string>
+    <string name="game_services_project_id">729844956844</string>
+    <string name="success_sign">Успешная авторизация</string>
+    <string name="error_signin">Неуспешно</string>
 </resources>
