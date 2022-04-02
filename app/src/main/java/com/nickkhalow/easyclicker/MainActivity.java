@@ -5,15 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.games.AuthenticationResult;
-import com.google.android.gms.games.GamesSignInClient;
-import com.google.android.gms.games.LeaderboardsClient;
-import com.google.android.gms.games.PlayGames;
-import com.google.android.gms.games.PlayGamesSdk;
-import com.google.android.gms.tasks.Task;
 import com.nickkhalow.easyclicker.databinding.ActivityFullscreenBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,15 +22,9 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityFullscreenBinding binding;
 
-    @Nullable
-    private LeaderboardsClient leaderboardsClient() {
-        return PlayGames.getLeaderboardsClient(this);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PlayGamesSdk.initialize(this);
 
         binding = ActivityFullscreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -51,19 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         updateRecordUI();
 
-        GamesSignInClient signInClient = PlayGames.getGamesSignInClient(this);
 
-        signInClient.isAuthenticated().addOnCompleteListener(task -> {
-            boolean isAuthenticated =
-                    (task.isSuccessful() &&
-                            task.getResult().isAuthenticated());
-
-            if (isAuthenticated) {
-                Toast.makeText(this, R.string.success_sign, Toast.LENGTH_LONG).show();
-            } else {
-                //Блокируем
-            }
-        });
     }
 
     @Override
@@ -81,22 +56,14 @@ public class MainActivity extends AppCompatActivity {
     private void clickReward() {
         record++;
         updateRecordUI();
-        PlayGames.getLeaderboardsClient(this)
-                .submitScore(getString(R.string.leaderboard_id), record);
+        //code
     }
 
     private void showLeaderboard() {
-        PlayGames.getLeaderboardsClient(this)
-                .getLeaderboardIntent(getString(R.string.leaderboard_id))
-                .addOnSuccessListener(intent -> startActivityForResult(intent, RC_LEADERBOARD_UI));
+        //code
     }
 
     private void startSignIn() {
-        PlayGames.getGamesSignInClient(this).signIn().addOnCompleteListener(task ->
-                Toast.makeText(
-                        this,
-                        task.isSuccessful() && task.getResult().isAuthenticated() ?
-                                R.string.success_sign : R.string.error_signin,
-                        Toast.LENGTH_LONG).show());
+        //code
     }
 }
